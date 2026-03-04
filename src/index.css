@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .glass-effect {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-sm;
+  }
+}
+
+html {
+  scroll-padding-top: 5rem;
+}
+
+body {
+  overflow-x: hidden;
+}
