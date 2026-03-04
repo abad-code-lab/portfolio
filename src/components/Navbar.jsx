@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import logo from '../img/logo_abad.jpeg';
 
 export default function Navbar() {
     const location = useLocation();
@@ -34,8 +35,11 @@ export default function Navbar() {
         <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'glass-effect py-4 shadow-sm' : 'glass-effect py-6 border-transparent shadow-none'}`}>
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center">
-                    <div className="flex-shrink-0 flex items-center">
-                        <Link to="/" className="font-bold text-xl lg:text-3xl text-slate-800 tracking-tighter cursor-pointer">
+                    <div className="flex items-center">
+                        <Link to="/" className="flex-shrink-0 mr-4 sm:mr-8">
+                            <img src={logo} alt="Logo Abdoulaye DAFFE" className="h-14 sm:h-16 w-auto object-contain" />
+                        </Link>
+                        <Link to="/" className="font-bold text-xl lg:text-3xl text-slate-800 tracking-tighter flex-shrink-0">
                             Abdoulaye DAFFE<span className="text-primary-600">.</span>
                         </Link>
                     </div>

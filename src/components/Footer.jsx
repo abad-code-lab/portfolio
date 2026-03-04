@@ -35,7 +35,7 @@ export default function Footer() {
                             <a href="https://github.com/abad-code-lab" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-slate-300 flex items-center justify-center hover:border-primary-400 hover:text-primary-600 transition-colors text-slate-400 hover:bg-white bg-slate-50">
                                 <Github size={18} />
                             </a>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-slate-300 flex items-center justify-center hover:border-primary-400 hover:text-primary-600 transition-colors text-slate-400 hover:bg-white bg-slate-50">
+                            <a href="https://www.linkedin.com/in/abdoulaye-daffe-38b82a266" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-slate-300 flex items-center justify-center hover:border-primary-400 hover:text-primary-600 transition-colors text-slate-400 hover:bg-white bg-slate-50">
                                 <Linkedin size={18} />
                             </a>
                             <Link to="/contact" className="w-10 h-10 rounded-full border border-slate-300 flex items-center justify-center hover:border-primary-400 hover:text-primary-600 transition-colors text-slate-400 hover:bg-white bg-slate-50">
