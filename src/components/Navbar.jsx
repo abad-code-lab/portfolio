@@ -36,8 +36,18 @@ export default function Navbar() {
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center">
                     <div className="flex items-center">
-                        <Link to="/" className="flex-shrink-0 mr-4 sm:mr-8">
-                            <img src={logo} alt="Logo Abdoulaye DAFFE" className="h-14 sm:h-16 w-auto object-contain" />
+                        <Link to="/" className="flex-shrink-0 mr-4 sm:mr-8 flex items-center justify-center">
+                            <div className="relative">
+                                {/* Decorative Outer Rings (Scaled down for Navbar) */}
+                                <div className="absolute inset-[-0.3rem] rounded-full border border-blue-100 animate-[spin_10s_linear_infinite]"></div>
+                                <div className="absolute inset-[-0.2rem] rounded-full border border-blue-200 opacity-60"></div>
+                                <div className="absolute inset-[-0.1rem] rounded-full border-2 border-primary-300"></div>
+
+                                {/* Image Container */}
+                                <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-full overflow-hidden bg-slate-200 relative z-10 shadow-md">
+                                    <img src={logo} alt="Logo Abdoulaye DAFFE" className="w-full h-full object-cover" />
+                                </div>
+                            </div>
                         </Link>
                         <Link to="/" className="font-bold text-xl lg:text-3xl text-slate-800 tracking-tighter flex-shrink-0">
                             Abdoulaye DAFFE<span className="text-primary-600">.</span>
