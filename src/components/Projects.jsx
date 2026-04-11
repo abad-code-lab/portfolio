@@ -191,6 +191,14 @@ export default function Projects() {
                                 >
                                     <Github size={16} /> Code
                                 </a>
+                                <a
+                                    href="https://portfolio-theta-tawny-66.vercel.app/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-primary-600 transition-colors"
+                                >
+                                    <ExternalLink size={16} /> Live Demo
+                                </a>
                             </div>
                         </div>
                     </div>
