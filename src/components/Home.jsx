@@ -1,9 +1,73 @@
 import React, { useState, useEffect } from 'react';
-import { ExternalLink, Download, Github, Linkedin, Mail, Monitor, Terminal, Code2, Database, Award, CheckCircle2 } from 'lucide-react';
+import { ExternalLink, Download, Github, Linkedin, Mail, Monitor, Terminal, Code2, Database, Award, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
+
+const ImageCarousel = ({ images }) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        if (!images || images.length <= 1) return;
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % images.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, [images]);
+
+    const nextImage = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setCurrentIndex((prev) => (prev + 1) % images.length);
+    };
+
+    const prevImage = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+    };
+
+    return (
+        <div className="relative w-full h-full group/carousel">
+            <img
+                src={images[currentIndex]}
+                alt={`Screenshot ${currentIndex + 1}`}
+                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/carousel:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/40 to-primary-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px] pointer-events-none">
+                <ExternalLink size={32} className="text-white drop-shadow-lg" />
+            </div>
+
+            {images.length > 1 && (
+                <>
+                    <button
+                        onClick={prevImage}
+                        className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white rounded-full p-1.5 opacity-0 group-hover/carousel:opacity-100 transition-opacity z-10 pointer-events-auto"
+                    >
+                        <ChevronLeft size={20} />
+                    </button>
+                    <button
+                        onClick={nextImage}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white rounded-full p-1.5 opacity-0 group-hover/carousel:opacity-100 transition-opacity z-10 pointer-events-auto"
+                    >
+                        <ChevronRight size={20} />
+                    </button>
+
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                        {images.map((_, idx) => (
+                            <div
+                                key={idx}
+                                className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-5 bg-primary-500' : 'w-2 bg-white/60'}`}
+                            />
+                        ))}
+                    </div>
+                </>
+            )}
+        </div>
+    );
+};
 import { Link } from 'react-router-dom';
 import lebon from '../img/lebon.jpeg';
 import cvFile from '../fichiers/CV_Abdoulaye_DAFFE.pdf';
 import cert01 from '../certificats/Coursera 1LCCYT4V83S9_certificat01.pdf';
+import cert02 from '../certificats/CertificatDaccomplissement_What Is Generative AI.pdf';
 
 export default function Home() {
     const [typingText, setTypingText] = useState('');
@@ -189,12 +253,13 @@ export default function Home() {
                     <div className="grid md:grid-cols-3 gap-8 text-left">
                         {/* Project 1 */}
                         <div className="bg-white rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-slate-50 overflow-hidden group hover:shadow-xl transition-shadow flex flex-col h-full">
-                            <div className="h-48 bg-slate-50 relative p-6 flex justify-center items-center">
-                                <div className="w-full h-full bg-white rounded-lg border border-slate-100 flex items-center justify-center relative overflow-hidden shadow-sm">
-                                    <Monitor size={48} className="text-primary-400" />
-                                    <Code2 size={24} className="text-primary-600 absolute top-4 right-4" />
-                                    <Database size={24} className="text-blue-300 absolute bottom-4 left-4" />
-                                </div>
+                            <div className="h-64 bg-slate-50 relative p-0 flex justify-center items-center overflow-hidden">
+                                <ImageCarousel images={[
+                                    "/img/projects/dashboard.png",
+                                    "/img/projects/evaluations_list.png",
+                                    "/img/projects/grading_interface.png",
+                                    "/img/projects/import_students.png"
+                                ]} />
                             </div>
                             <div className="p-8 flex flex-col flex-grow">
                                 <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-primary-600 transition-colors">Gestion des notes étudiants</h3>
@@ -281,32 +346,97 @@ export default function Home() {
                         Certifications officielles validant mes <span className="text-primary-600 font-medium">compétences techniques</span> et mon engagement dans l'apprentissage continu.
                     </p>
 
-                    <div className="flex justify-center">
+                    <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                         {/* Certif 1 */}
-                        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden max-w-md w-full">
-                            <div className="absolute top-0 right-8 w-8 h-12 bg-orange-100/50 flex justify-center pt-2 rounded-b-md">
-                                <Award size={20} className="text-orange-400" />
-                            </div>
-                            <div>
-                                <h3 className="text-xl font-bold text-slate-800 mb-4 leading-snug pr-8 group-hover:text-primary-600 transition-colors">
-                                    Vulnerability Scanning with Nmap: Network Scanning
-                                </h3>
-                                <div className="flex items-center gap-2 text-slate-500 text-sm mb-2">
-                                    <CheckCircle2 size={16} className="text-primary-500" />
-                                    <span className="font-medium text-slate-700 italic">Coursera</span>
+                        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden w-full group">
+                            {/* Image Preview */}
+                            <div className="h-48 bg-slate-100 relative overflow-hidden border-b border-slate-100">
+                                <img
+                                    src="/img/certificats/nmap.png"
+                                    alt="Vulnerability Scanning with Nmap: Network Scanning"
+                                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                    onError={(e) => {
+                                        e.target.style.display = 'none';
+                                        e.target.nextSibling.classList.remove('hidden');
+                                        e.target.nextSibling.classList.add('flex');
+                                    }}
+                                />
+                                <div className="hidden absolute inset-0 bg-gradient-to-br from-orange-50 to-orange-100/50 flex-col items-center justify-center text-orange-400">
+                                    <Award size={48} className="opacity-40 mb-2" />
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-orange-600/60">Aperçu indisponible</span>
                                 </div>
-                                <p className="text-slate-400 text-xs text-center mb-6">Obtenu en 2024</p>
+                                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-xl text-orange-500 shadow-sm border border-orange-100">
+                                    <Award size={20} />
+                                </div>
+                            </div>
 
-                                <div className="flex gap-2 flex-wrap mb-8 justify-center">
-                                    <span className="bg-slate-100 text-slate-600 text-xs px-4 py-1.5 rounded-full font-medium">Analyse Résaux</span>
-                                    <span className="bg-slate-100 text-slate-600 text-xs px-4 py-1.5 rounded-full font-medium">Sécurité</span>
-                                    <span className="bg-slate-100 text-slate-600 text-xs px-4 py-1.5 rounded-full font-medium">Nmap</span>
+                            <div className="p-8 pb-6 flex-grow flex flex-col justify-between">
+                                <div>
+                                    <h3 className="text-xl font-bold text-slate-800 mb-4 leading-snug group-hover:text-primary-600 transition-colors">
+                                        Vulnerability Scanning with Nmap: Network Scanning
+                                    </h3>
+                                    <div className="flex items-center gap-2 text-slate-500 text-sm mb-2">
+                                        <CheckCircle2 size={16} className="text-primary-500" />
+                                        <span className="font-medium text-slate-700 italic">Coursera</span>
+                                    </div>
+                                    <p className="text-slate-400 text-xs mb-6">Obtenu en 2024</p>
+
+                                    <div className="flex gap-2 flex-wrap mb-8">
+                                        <span className="bg-slate-100 text-slate-600 text-xs px-4 py-1.5 rounded-full font-medium">Analyse Résaux</span>
+                                        <span className="bg-slate-100 text-slate-600 text-xs px-4 py-1.5 rounded-full font-medium">Sécurité</span>
+                                    </div>
+                                </div>
+                                <a href={cert01} target="_blank" rel="noopener noreferrer" className="w-full inline-flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white border border-primary-600 px-6 py-3 rounded-xl font-medium transition-all shadow-sm group/btn">
+                                    <span>Voir la certification</span>
+                                    <ExternalLink size={16} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Certif 2 */}
+                        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden w-full group">
+                            {/* Image Preview */}
+                            <div className="h-48 bg-slate-100 relative overflow-hidden border-b border-slate-100">
+                                <img
+                                    src="/img/certificats/generative_ai.png"
+                                    alt="What Is Generative AI?"
+                                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                    onError={(e) => {
+                                        e.target.style.display = 'none';
+                                        e.target.nextSibling.classList.remove('hidden');
+                                        e.target.nextSibling.classList.add('flex');
+                                    }}
+                                />
+                                <div className="hidden absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100/50 flex-col items-center justify-center text-blue-500">
+                                    <Award size={48} className="opacity-40 mb-2" />
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600/60">Aperçu indisponible</span>
+                                </div>
+                                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-xl text-blue-500 shadow-sm border border-blue-100">
+                                    <Award size={20} />
                                 </div>
                             </div>
-                            <a href={cert01} target="_blank" rel="noopener noreferrer" className="w-full inline-flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white border border-primary-600 px-6 py-3 rounded-xl font-medium transition-all shadow-sm group">
-                                <span>Voir la certification</span>
-                                <ExternalLink size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                            </a>
+
+                            <div className="p-8 pb-6 flex-grow flex flex-col justify-between">
+                                <div>
+                                    <h3 className="text-xl font-bold text-slate-800 mb-4 leading-snug group-hover:text-primary-600 transition-colors">
+                                        What Is Generative AI?
+                                    </h3>
+                                    <div className="flex items-center gap-2 text-slate-500 text-sm mb-2">
+                                        <CheckCircle2 size={16} className="text-primary-500" />
+                                        <span className="font-medium text-slate-700 italic">LinkedIn Learning</span>
+                                    </div>
+                                    <p className="text-slate-400 text-xs mb-6">Obtenu le 07/03/2026</p>
+
+                                    <div className="flex gap-2 flex-wrap mb-8">
+                                        <span className="bg-slate-100 text-slate-600 text-xs px-4 py-1.5 rounded-full font-medium">IA Générative</span>
+                                        <span className="bg-slate-100 text-slate-600 text-xs px-4 py-1.5 rounded-full font-medium">Innovation</span>
+                                    </div>
+                                </div>
+                                <a href={cert02} target="_blank" rel="noopener noreferrer" className="w-full inline-flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white border border-primary-600 px-6 py-3 rounded-xl font-medium transition-all shadow-sm group/btn">
+                                    <span>Voir la certification</span>
+                                    <ExternalLink size={16} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

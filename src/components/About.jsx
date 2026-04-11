@@ -200,7 +200,7 @@ export default function About() {
 
                     <div className="bg-blue-50/50 p-10 rounded-[2.5rem] border border-blue-100/50 shadow-sm">
                         <p className="text-slate-600 text-lg leading-relaxed font-light">
-                            En dehors du code, j'aime explorer les domaines de <span className="text-primary-600 font-medium">l'intelligence artificielle, Big Data, la cybersécurité et Cloud</span>,
+                            En dehors du code, j'aime explorer les domaines de <span className="text-primary-600 font-medium">l'intelligence artificielle, le Big Data, la cybersécurité et le Cloud</span>,
                             contribuer à des projets open source, et partager mes connaissances avec d'autres développeurs.
                             J'apprécie également la lecture, les challenges de programmation et le sport pour garder l'équilibre entre vie professionnelle et personnelle.
                         </p>
