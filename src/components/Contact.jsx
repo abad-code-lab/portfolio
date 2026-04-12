@@ -13,9 +13,9 @@ export default function Contact() {
         setStatus({ type: '', message: '' });
 
         // NOTE: Replace these with real IDs from your EmailJS account
-        const SERVICE_ID = 'service_ayvyczr';
-        const TEMPLATE_ID = 'template_y58qsrf';
-        const PUBLIC_KEY = 'ImRDV5TofmbEGlSFS';
+        const SERVICE_ID = 'service_xmty5x8';
+        const TEMPLATE_ID = 'template_va0a2je';
+        const PUBLIC_KEY = 'bHD3Uoc1nxXzVxu79';
 
         emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
             .then((result) => {
