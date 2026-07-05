@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Code2, Monitor, Github, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Code2, Monitor, Github, ExternalLink, ChevronLeft, ChevronRight, Database, Server } from 'lucide-react';
 
 const ImageCarousel = ({ images }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -198,6 +198,41 @@ export default function Projects() {
                                     className="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-primary-600 transition-colors"
                                 >
                                     <ExternalLink size={16} /> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {/* Project 5 */}
+                    <div className="bg-slate-50 rounded-3xl overflow-hidden border border-slate-100 group flex flex-col h-full animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+                        <div className="h-64 bg-slate-200 relative overflow-hidden">
+                            <ImageCarousel images={[
+                                "/img/projects/architecture_postgres_compose_stack.png",
+                                "/img/projects/docker-compose.PNG",
+                                "/img/projects/pgAdmin.PNG",
+                                "/img/projects/up.PNG",
+                                "/img/projects/view_analytics.PNG"
+                            ]} />
+                        </div>
+                        <div className="p-8 flex flex-col flex-grow">
+                            <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-primary-600 transition-colors">postgres-compose-stack</h3>
+                            <p className="text-slate-600 font-light mb-6 text-sm leading-relaxed flex-grow">
+                                Conception et déploiement d'une infrastructure de base de données PostgreSQL containerisée avec Docker, incluant une interface d'administration pgAdmin pour la gestion et l'exploration des données.
+                            </p>
+                            <div className="flex gap-2 flex-wrap mb-6">
+                                <span className="bg-white border border-slate-200 text-slate-600 text-[10px] px-3 py-1 rounded-full font-medium">Docker</span>
+                                <span className="bg-white border border-slate-200 text-slate-600 text-[10px] px-3 py-1 rounded-full font-medium">Docker Compose</span>
+                                <span className="bg-white border border-slate-200 text-slate-600 text-[10px] px-3 py-1 rounded-full font-medium">PostgreSQL 16</span>
+                                <span className="bg-white border border-slate-200 text-slate-600 text-[10px] px-3 py-1 rounded-full font-medium">pgAdmin 4</span>
+                                <span className="bg-white border border-slate-200 text-slate-600 text-[10px] px-3 py-1 rounded-full font-medium">YAML</span>
+                            </div>
+                            <div className="flex gap-4 mt-auto border-t border-slate-100 pt-4">
+                                <a
+                                    href="https://github.com/abad-code-lab/postgres-compose-stack"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors"
+                                >
+                                    <Github size={16} /> Code
                                 </a>
                             </div>
                         </div>
